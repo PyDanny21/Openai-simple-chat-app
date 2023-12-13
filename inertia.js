@@ -36,12 +36,12 @@ function speech() {
         };
         
         recognition.onerror=()=>{
-            speak('Could not recognize voice');
+            speak('please,i could not recognize voice');
         };
         
         recognition.start();
     } else {
-        speak('Could not recognize voice');
+        speak('please, i could not recognize voice');
     };
     
 };
