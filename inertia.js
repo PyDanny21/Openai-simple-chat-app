@@ -12,7 +12,7 @@ function speak(sentence) {
 
     const text_speak = new SpeechSynthesisUtterance(sentence);
 
-    text_speak.rate=1.5;
+    text_speak.rate=1;
 
     text_speak.pitch=100;
 
@@ -25,38 +25,31 @@ function speak(sentence) {
 }
 
 const SpeechRecognition=window.SpeechRecognition || window.webkitSpeechRecognition;
-const recognition=new SpeechRecognition();
+if (SpeechRecognition) {
+    const recognition=new SpeechRecognition();
+    recognition.onstart=()=>{
+        speak('Listening...');
+    };
+    recognition.onresult=(event)=>{
+        const transcript=event.results[0][0].transcript;
+        appendMessage(transcript,'user');
+        speakThis(transcript.toLowerCase());
+    };
+    recognition.onerror=(event)=>{
+        speak('Could not recognize voice');
+    };
 
-
-
-recognition.onresult=(event)=>{
-    const current=event.resultIndex;
-    const transcript=event.results[current][0].transcript;
-    content.textContent=transcript;
-    speakThis(transcript.toLowerCase())
-
+} else {
+    speak('An error occured');
+    
 };
+
 
 
 btn.addEventListener('click',()=>{
     recognition.start();
-})
+});
 
-
-
-// input.addEventListener('focus',()=>{
-
-//     if (text='') {
-
-//         console.log('waiting')
-
-//     } else {
-
-//         console.log('typing')
-
-//     }
-
-// });
 
 my_dictionary={
     'hello':'hi sir, how are you?',
@@ -99,98 +92,20 @@ my_dictionary={
 
 function speakThis(message) {
     // using dictionary
+    message=message.toLowerCase();
     if (my_dictionary.hasOwnProperty(message)) {
         appendMessage(message,'user');
         result=my_dictionary[message];
         speak(result);
         appendMessage(result,'Bot'); 
     } else {
-        window.open('https://www.google.com/search?='+message.replace(' ','+'),'_blank');
+        window.open('https://www.google.com/search?='+message.replace('','+'),'_blank');
         appendMessage(message,'user')
         speak();
         appendMessage('I found some information for'+message+'on google','Bot')
     };
-
-    
-    // switch (message) {
-    //     case 'hey':
-    //         appendMessage(message,'user');
-    //         result='Hello boss, How can i help you?';
-    //         speak(result);
-    //         appendMessage(result,'Bot');            
-
-    //         break;
-
-    //     case 'hello':
-    //         appendMessage(message,'user');
-    //         result='Hi boss';
-    //         speak(result);
-    //         appendMessage(result,'Bot'); 
-    //         break;
-
-    //     case 'how are you?':
-    //         appendMessage(message,'user');
-    //         result='I am doing good and you sir!';
-    //         speak(result);
-    //         appendMessage(result,'Bot'); 
-    //         break;
-
-    //     case 'hope you good':
-    //         appendMessage(message,'user');
-    //         result='Yes sir, and you?';
-    //         speak(result);
-    //         appendMessage(result,'Bot'); 
-
-    //         break;
-
-    //     case 'how was your day':
-    //         appendMessage(message,'user');
-    //         result='It was amazing sir';
-    //         speak(result);
-    //         appendMessage(result,'Bot'); 
-    //         break;
-
-    //     case 'good':
-    //         appendMessage(message,'user');
-    //         result='Thanks to God';
-    //         speak(result);
-    //         appendMessage(result,'Bot'); 
-    //         break;
-
-    //     case 'hey':
-    //         appendMessage(message,'user');
-    //         result='Hello boss';
-    //         speak(result);
-    //         appendMessage(result,'Bot'); 
-    //         break;
-
-    //     case 'hey':
-    //         appendMessage(message,'user');
-    //         result='Hello boss';
-    //         speak(result);
-    //         appendMessage(result,'Bot'); 
-
-
-
-    //     default:
-
-    //         window.open('https://www.google.com/search?='+message.replace(' ','+'),'_blank');
-
-    //         speak('I found some information for you'+message+'on google');
-
-    //         break;
-
-    // }
-
-
-
 };
-
-// sendButton.addEventListener('click', () => {
-//     speakThis();
-
-// });
-
+    
 input.addEventListener('focus',()=>{
     Send.style.display='block';
     btn.style.display='none';
@@ -205,7 +120,7 @@ document.querySelector('.container').addEventListener('click',()=>{
 
 
 Send.addEventListener('click',()=>{
-    message=input.value.trim();
+    message=input.value.trim().toLowerCase();
     speakThis(message);
 });
 
@@ -216,14 +131,6 @@ input.addEventListener('keyup', (event) => {
     };
 
 });
-
-
-
-// // Replace 'YOUR_API_KEY' with your actual OpenAI GPT-3.5 API key
-
-// const apiKey = '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';
-
-// const endpoint = 'https://api.openai.com/v1/engines/davinci-codex/completions';
 
 
 
@@ -254,80 +161,6 @@ function appendMessage(message, sender) {
 };
 
 document.addEventListener('DOMContentLoaded',()=>{
-    appendMessage('Hi, please how may I help you?','Bot')
+    appendMessage('Hi, please how may I help you?','Bot');
 
 });
-
-// async function sendMessageToChatGPT(userMessage) {
-
-//     try {
-//         const response = await fetch(endpoint, {
-
-//             method: 'POST',
-
-//             headers: {
-
-//             'Content-Type': 'application/json',
-
-//             'Authorization': `Bearer ${apiKey}`
-
-//             },
-
-//             body: JSON.stringify({
-
-//             prompt: `User: ${userMessage}\nChatGPT:`
-
-//             })
-
-            
-//     });
-        
-//     const data = await response.json();
-    
-//     const botReply = data.choices[0].text.trim();
-
-//     speak(botReply)
-    
-//     appendMessage(botReply, 'ChatGPT');
-
-//     } catch (error) {
-
-//     console.error('Error:', error);
-
-//     speak('Sorry, an error occurred.');
-
-//     appendMessage('Sorry, an error occurred.', 'ChatGPT');
-
-//     }
-
-// };
-
-
-
-//     sendButton.addEventListener('click', () => {
-
-//         const userMessage = userInput.value.trim();
-
-//         if (userMessage) {
-
-//         appendMessage(userMessage, 'You');
-
-//         userInput.value = '';
-
-//         sendMessageToChatGPT(userMessage);
-
-//     };
-
-//     });
-
-
-
-// userInput.addEventListener('keyup', (event) => {
-
-// if (event.key === 'Enter') {
-
-// sendButton.click();
-
-// }
-
-// });
