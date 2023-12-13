@@ -22,32 +22,37 @@ function speak(sentence) {
 
 };
 
-const SpeechRecognition=window.SpeechRecognition || window.webkitSpeechRecognition;
-if (SpeechRecognition) {
-    const recognition=new SpeechRecognition();
-    recognition.onstart=()=>{
-        speak('Listening');
-    };
-    recognition.onresult=(event)=>{
-        const transcript=event.results[0][0].transcript;
-        appendMessage(transcript,'user');
-        speakThis(transcript.toLowerCase());
-    };
-    
-    recognition.onerror=()=>{
+function speech() {
+    const SpeechRecognition=window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
+        const recognition=new SpeechRecognition();
+        recognition.onstart=()=>{
+            speak('Listening');
+        };
+        recognition.onresult=(event)=>{
+            const transcript=event.results[0][0].transcript;
+            appendMessage(transcript,'user');
+            speakThis(transcript.toLowerCase());
+        };
+        
+        recognition.onerror=()=>{
+            speak('Could not recognize voice');
+        };
+        
+        recognition.start();
+    } else {
         speak('Could not recognize voice');
     };
     
-} else {
-    speak('Could not recognize voice');
 };
 
 
 
 
 
+
 btn.addEventListener('click',()=>{
-    recognition.start();
+    speech();
 });
 
 
