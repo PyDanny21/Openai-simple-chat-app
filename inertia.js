@@ -36,7 +36,7 @@ function speech() {
         };
         
         recognition.onerror=()=>{
-            speak('please,i could not recognize voice');
+            speak('please,i could not recognize your voice');
         };
         
         recognition.start();
@@ -106,7 +106,7 @@ function speakThis(message) {
     } else {
         appendMessage(message,'user');
         appendMessage('Not found','Bot');
-        speak('Sir, please i did not find anythingin my database')
+        speak('Sir, please i did not find anything in my database')
         // window.open('https://www.google.com/search?='+message.replace('','+'),'_blank');
         // speak();
         // appendMessage('I found some information for '+message+' on google','Bot');
