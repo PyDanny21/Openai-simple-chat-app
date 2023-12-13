@@ -104,6 +104,7 @@ function speakThis(message) {
         speak(result);
         appendMessage(result,'Bot'); 
     } else {
+        appendMessage(message,'user');
         appendMessage('Not found','Bot');
         speak('Sir, please i did not find anythingin my database')
         // window.open('https://www.google.com/search?='+message.replace('','+'),'_blank');
