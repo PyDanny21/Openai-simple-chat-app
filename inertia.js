@@ -31,7 +31,7 @@ function speech() {
         };
         recognition.onresult=(event)=>{
             const transcript=event.results[0][0].transcript;
-            appendMessage(transcript,'user');
+            // appendMessage(transcript,'user');
             speakThis(transcript.toLowerCase());
         };
         
