@@ -25,24 +25,20 @@ function speak(sentence) {
 }
 
 const SpeechRecognition=window.SpeechRecognition || window.webkitSpeechRecognition;
-if (SpeechRecognition) {
-    const recognition=new SpeechRecognition();
-    recognition.onstart=()=>{
-        speak('Listening...');
-    };
-    recognition.onresult=(event)=>{
-        const transcript=event.results[0][0].transcript;
-        appendMessage(transcript,'user');
-        speakThis(transcript.toLowerCase());
-    };
-    recognition.onerror=(event)=>{
-        speak('Could not recognize voice');
-    };
-
-} else {
-    speak('An error occured');
-    
+const recognition=new SpeechRecognition();
+recognition.onstart=()=>{
+    speak('Listening...');
 };
+recognition.onresult=(event)=>{
+    const transcript=event.results[0][0].transcript;
+    appendMessage(transcript,'user');
+    speakThis(transcript.toLowerCase());
+};
+recognition.onerror=()=>{
+    speak('Could not recognize voice');
+};
+
+
 
 
 
@@ -99,10 +95,10 @@ function speakThis(message) {
         speak(result);
         appendMessage(result,'Bot'); 
     } else {
+        appendMessage(message,'user');
         window.open('https://www.google.com/search?='+message.replace('','+'),'_blank');
-        appendMessage(message,'user')
         speak();
-        appendMessage('I found some information for'+message+'on google','Bot')
+        appendMessage('I found some information for '+message+' on google','Bot');
     };
 };
     
