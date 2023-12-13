@@ -1,0 +1,304 @@
+    
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+  height: fit-content;
+  background: darkslategray;
+  color: #fff;
+}
+.body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+.container{
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    /* display: inline-block; */
+    top: 0;
+    padding: 0;
+
+}
+nav{
+    width: 100%;
+    height: 60px;
+    background: darkslategray;
+    /* padding: 25px; */
+    display: flex;
+    align-items: center;
+    position: fixed;
+    justify-content: space-between;
+    z-index: 100;
+}
+nav .logo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    left: 0;
+    margin-left: 5px;
+}
+.logo h1{
+    padding-left: 20px;
+    font-size: 20px;
+    cursor: default;
+}
+
+
+.logo h2{
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+.icons{
+    right: 0;
+    margin-right: 5px;
+}
+
+.icons img{
+    width: 45px;
+    padding-right: 10px;
+    cursor: pointer;
+    
+}
+
+/* .gif-container{
+    width: 100%;
+    height: 140px;
+    background-image: url('QjoV.gif');
+    background-size: contain;
+    background-repeat: repeat-x;
+} */
+.text-display{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    min-height: 100vh;
+    /* align-items: center; */
+    /* justify-content: space-between; */
+    /* inline-size: 100%; */
+    /* background: transparent; */
+    position: relative;
+    padding-bottom: 100px;
+
+}
+
+div{
+    padding:0 10px;
+    font-size: 20px;
+}
+/* .text-display div{
+  width: 50%;
+} */
+
+
+.post,.get{
+    padding: 10px;
+    /* margin:20px; */
+    right: 0;
+    margin: 10px 0;
+    font-family: sans-serif;
+
+    /* text-align: right; */
+    /* align-items: ; */
+    /* position: absolute; */
+    border-radius: 25px;
+    width:fit-content;
+    display: flex;
+    float: left;
+    color: #fff;
+    background: darkslategray;
+}
+
+.get{
+    background: green;
+}
+
+.input{
+    background: transparent;
+    display: flex;
+    height: 100px;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    margin-bottom: 0;
+    bottom: 0;
+    width: 100%;
+}
+.input input{
+    width: 90%;
+    height: 50px;
+    padding: 20px;
+    border-radius: 25px;
+    color: #fff;
+    background: darkslategray;
+    /* margin-left: 20px; */
+    outline: none;
+    font-size: 18px;
+    border: none;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0,.5);
+}
+
+
+.input .send{
+    width: 70px;
+    border-radius: 50px;
+    height: 70px;
+    display: flexbox;
+    background: green;
+    margin: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0,.5);
+}
+
+.sendbutton, .talk {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  /* margin-left: 5px; */
+  background: transparent;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.sendbutton img, .talk img{
+    width: 40px;
+    padding: 3px;
+    border: none;
+}
+
+.sendbutton{
+  display: none;
+}
+
+.login{
+    width: 100%;
+    height: 100%;
+    display: none;
+    /* background: red; */
+}
+.login-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    background: rgba(24, 20, 20, 0.987);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    border-radius: 10px;
+  }
+  
+  .login-box .user-box {
+    position: relative;
+  }
+  
+  .login-box .user-box input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+  }
+  
+  .login-box .user-box label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+  }
+  
+  .login-box .user-box input:focus ~ label,
+  .login-box .user-box input:valid ~ label {
+    top: -20px;
+    left: 0;
+    color: #bdb8b8;
+    font-size: 12px;
+  }
+  
+  .login-box form a {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #ffffff;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    margin-top: 40px;
+    letter-spacing: 4px
+  }
+  
+  .login-box a:hover {
+    background: #03f40f;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03f40f,
+                0 0 25px #03f40f,
+                0 0 50px #03f40f,
+                0 0 100px #03f40f;
+  }
+  
+  .login-box a span {
+    position: absolute;
+    display: block;
+  }
+  
+  @keyframes btn-anim1 {
+    0% {
+      left: -100%;
+    }
+  
+    50%,100% {
+      left: 100%;
+    }
+  }
+  
+  .login-box a span:nth-child(1) {
+    bottom: 2px;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #03f40f);
+    animation: btn-anim1 2s linear infinite;
+  }
+
+
+  @media (max-width:700px) {
+    .input .send{
+      width: 60px;
+      border-radius: 50%;
+      height: 60px;
+      display: flexbox;
+      background: green;
+      margin:0;
+      margin-left: 10px;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0,.5);
+    }
+    .input{
+      height: 10vh;
+    }
+    .text-display {
+      padding: 70px 10px;
+  }
+  }
