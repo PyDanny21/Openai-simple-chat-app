@@ -20,21 +20,25 @@ function speak(sentence) {
 
     window.speechSynthesis.speak(text_speak);
 
-
-
-}
+};
 
 const SpeechRecognition=window.SpeechRecognition || window.webkitSpeechRecognition;
-const recognition=new SpeechRecognition();
-recognition.onstart=()=>{
-    speak('Listening...');
-};
-recognition.onresult=(event)=>{
-    const transcript=event.results[0][0].transcript;
-    appendMessage(transcript,'user');
-    speakThis(transcript.toLowerCase());
-};
-recognition.onerror=()=>{
+if (SpeechRecognition) {
+    const recognition=new SpeechRecognition();
+    recognition.onstart=()=>{
+        speak('Listening');
+    };
+    recognition.onresult=(event)=>{
+        const transcript=event.results[0][0].transcript;
+        appendMessage(transcript,'user');
+        speakThis(transcript.toLowerCase());
+    };
+    
+    recognition.onerror=()=>{
+        speak('Could not recognize voice');
+    };
+    
+} else {
     speak('Could not recognize voice');
 };
 
@@ -95,10 +99,11 @@ function speakThis(message) {
         speak(result);
         appendMessage(result,'Bot'); 
     } else {
-        appendMessage(message,'user');
-        window.open('https://www.google.com/search?='+message.replace('','+'),'_blank');
-        speak();
-        appendMessage('I found some information for '+message+' on google','Bot');
+        appendMessage('Not found','Bot');
+        speak('Sir, please i did not find anythingin my database')
+        // window.open('https://www.google.com/search?='+message.replace('','+'),'_blank');
+        // speak();
+        // appendMessage('I found some information for '+message+' on google','Bot');
     };
 };
     
@@ -116,7 +121,7 @@ document.querySelector('.container').addEventListener('click',()=>{
 
 
 Send.addEventListener('click',()=>{
-    message=input.value.trim().toLowerCase();
+    message=input.value.trim();
     speakThis(message);
 });
 
